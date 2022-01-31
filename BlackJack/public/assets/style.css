@@ -1,0 +1,25 @@
+body {
+    background-color: rgb(148, 86, 4);
+}
+
+main {
+    margin-top: 30px;
+}
+
+.card_holder{
+    flex-direction: column;
+    background-color: rgba(177, 107, 15, 0.829);
+    margin-left: 10px;
+    width: 7%;
+    height: auto;
+}
+
+.card {
+    width: 100%;
+    height: auto;
+}
+
+#buttom {
+    width: 100%;
+    background-color: azure;
+}

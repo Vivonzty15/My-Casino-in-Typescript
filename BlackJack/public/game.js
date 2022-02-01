@@ -1,43 +1,72 @@
 let game = {
-    cash: 100,
-    bet: 10,
+    money: document.getElementById('money'),
+    betInput: document.getElementById("bet-amt").value,
     inGame: false,
-    hit: document.getElementById("hit"),
-    stand: document.getElementById("stand"),
-    startGame: document.getElementById("new-game"),
-    p1_1: document.getElementById("p1-1"),
-    p1_2: document.getElementById("p1-2"),
-    p1_3: document.getElementById("p1-3"),
-    p1_4: document.getElementById("p1-4"),
-    p1_5: document.getElementById("p1-5"),
-    d1: document.getElementById("d-1"),
-    d2: document.getElementById("d-2"),
-    d3: document.getElementById("d-3"),
-    d4: document.getElementById("d-4"),
-    d5: document.getElementById("d-5"),
-
-
-    //hit
-
-    //stand
-
-    //win
-
-    //lose
-
-    //tie
-
-
+    hitButton: document.getElementById("hit"),
+    standButton: document.getElementById("stand"),
+    startGameButton: document.getElementById("new-game"),
+    p1Hand:{
+        c1: document.getElementById("p1-1"),
+        c2: document.getElementById("p1-2"),
+        c3: document.getElementById("p1-3"),
+        c4: document.getElementById("p1-4"),
+        c5: document.getElementById("p1-5"),
+        total: 0
+    },
+    dHand: {
+        c1: document.getElementById("d-1"),
+        c2: document.getElementById("d-2"),
+        c3: document.getElementById("d-3"),
+        c4: document.getElementById("d-4"),
+        c5: document.getElementById("d-5"),
+        total:0
+    }
 }
-//new game
+
+class player {
+    constructor(name, playerID) {
+        this.name = name
+        this.money = 100
+        this.count = 0
+        this.hand = []
+        this.playerID = playerID
+    }
+}
+
+let player1 
+    //set up game
+function setUp() {
+    player1 = new player("p1", "p1")
+    money = 100;
+    game.money.innerHTML = "$" + money;
+    game.betInput.value = 10;
+    game.betInput.disabled = false;
+    game.standButton.disabled = true;
+    game.hitButton.disabled = true;
+    game.startGameButton.disabled = false;
+    getDeck()
+}
+
+    //start game
  function newGame() {
-    game.startGame.addEventListener('click', function() {
-        getDeck()
+    game.startGameButton.addEventListener('click', function() {
         
-        game.p1_1.src = deck.source.pop()
-        game.d1.src = deck.source.pop()
-        game.p1_2.src = deck.source.pop()
-        game.d2.src = deck.source.pop()
+
+        pcard1 = deck.cards.pop()
+        game.p1Hand.c1.src= pcard1.source
+        dcard1 = deck.cards.pop()
+        game.dHand.c1.src = dcard1.source
+        pcard2 = deck.cards.pop()
+        game.p1Hand.c2.src = pcard2.source
+        dcard2 = deck.cards.pop()
+        game.dHand.c2.src = 'assets/images/facedown.png'
+        player1.hand.push(pcard1, pcard2)
+        player1.count = pcard1.value + pcard2.value
+        console.log(player1)
+        game.betInput.disabled = true;
+        game.standButton.disabled = false;
+        game.hitButton.disabled = false;
+        game.startGameButton.disabled = true;
         console.log('Game started')
     })
 }

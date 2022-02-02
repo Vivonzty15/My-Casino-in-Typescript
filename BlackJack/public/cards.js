@@ -65,3 +65,46 @@ function getDeck () {
     }
     return array
 }
+
+function dealCard(person) {
+    if (deck.cards.length == 0) {
+        getDeck()
+        
+    }
+    let card = deck.cards.pop()
+    switch (person.hand.length) { // checks how many cards the person has to decide where to put the card
+        case 0: 
+        person.hand.push(card);
+        person.count += card.value;
+        person.DOM.c1.src = card.source
+        break;
+        case 1: 
+        person.hand.push(card);
+        person.count += card.value;
+        switch (person === dealer){ // might make a faceDown function for this
+            case true: person.DOM.c2.src = 'assets/images/facedown.png'; break;
+            case false: person.DOM.c2.src = card.source; break;
+        }
+        break;
+        case 2: 
+        switch (person === dealer) { // there could be a faceUp function as well
+            case true: person.DOM.c2.src = person.hand[1].source; break;
+        }
+        person.hand.push(card);
+        person.count += card.value;
+        person.DOM.c3.src = card.source
+        break;
+        case 3: 
+        person.hand.push(card);
+        person.count += card.value;
+        person.DOM.c4.src = card.source
+        break;
+        case 4: 
+        person.hand.push(card);
+        person.count += card.value;
+        person.DOM.c5.src = card.source
+        break;
+        default: console.log('no room for another card')
+    }
+
+}

@@ -5,22 +5,18 @@ let game = {
     hitButton: document.getElementById("hit"),
     standButton: document.getElementById("stand"),
     startGameButton: document.getElementById("new-game"),
-    p1Hand:{
-        c1: document.getElementById("p1-1"),
-        c2: document.getElementById("p1-2"),
-        c3: document.getElementById("p1-3"),
-        c4: document.getElementById("p1-4"),
-        c5: document.getElementById("p1-5"),
-        total: 0
-    },
-    dHand: {
-        c1: document.getElementById("d-1"),
-        c2: document.getElementById("d-2"),
-        c3: document.getElementById("d-3"),
-        c4: document.getElementById("d-4"),
-        c5: document.getElementById("d-5"),
-        total:0
-    }
+}
+
+let dealer = {
+    hand: [],
+    count: 0,
+    DOM: {
+       c1: document.getElementById("d-1"),
+       c2: document.getElementById("d-2"),
+       c3: document.getElementById("d-3"),
+       c4: document.getElementById("d-4"),
+       c5: document.getElementById("d-5"),
+   }
 }
 
 class player {
@@ -29,6 +25,13 @@ class player {
         this.money = 100
         this.count = 0
         this.hand = []
+        this.DOM = {
+            c1: document.getElementById("p1-1"),
+            c2: document.getElementById("p1-2"),
+            c3: document.getElementById("p1-3"),
+            c4: document.getElementById("p1-4"),
+            c5: document.getElementById("p1-5"),
+        }
         this.playerID = playerID
     }
 }
@@ -50,18 +53,16 @@ function setUp() {
     //start game
  function newGame() {
     game.startGameButton.addEventListener('click', function() {
-        
+        if (deck.cards.length == 0) {
+            getDeck()
+        }
 
-        pcard1 = deck.cards.pop()
-        game.p1Hand.c1.src= pcard1.source
-        dcard1 = deck.cards.pop()
-        game.dHand.c1.src = dcard1.source
-        pcard2 = deck.cards.pop()
-        game.p1Hand.c2.src = pcard2.source
-        dcard2 = deck.cards.pop()
-        game.dHand.c2.src = 'assets/images/facedown.png'
-        player1.hand.push(pcard1, pcard2)
-        player1.count = pcard1.value + pcard2.value
+        dealCard(player1)
+        //pcard1 = deck.cards.pop()
+        //player1.DOM.c1.src= pcard1.source
+        dealCard(dealer)
+        dealCard(player1)
+        dealCard(dealer)
         console.log(player1)
         game.betInput.disabled = true;
         game.standButton.disabled = false;
@@ -72,13 +73,20 @@ function setUp() {
 }
 
 function hit() {
-    game.hit.addEventListener('click', function () {
-
+    game.hitButton.addEventListener('click', function () {
+        dealCard(player1)
+        console.log(player1)
     })
 }
 
 function stand() {
-    game.stand.addEventListener('click', function() {
-
+    game.standButton.addEventListener('click', function() {
+        while (dealer.count <= 17){
+            dealCard(dealer)
+        }
     })
+}
+
+function endGame() {
+    // contains the code that happens when the game ends
 }

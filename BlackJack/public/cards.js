@@ -11,6 +11,17 @@ class card {
     constructor(value, source) {
         this.value = value
         this.source = source
+        this.image = this.getImage()
+    }
+
+    ace(){
+        return this.value = 1 
+    }
+
+    getImage() {
+        let image = document.createElement('img')
+        image.src = this.source
+        return image
     }
 }
 
@@ -30,7 +41,7 @@ function getDeck () {
         for(let v = 0; v < cardCreator.values.length; v++) {
             //let card = {Value: this.values[v], Suit: this.suits[s]}
             switch (cardCreator.values[v]){
-                case 'A': count = 11; break;
+                case 'A': count = [1, 11]; break;
                 case '2': count = 2; break;
                 case '3': count = 3; break;
                 case '4': count = 4; break;
@@ -66,7 +77,7 @@ function getDeck () {
     return array
 }
 
-function dealCard(person) {
+function dealCard(person) {                     // should I leave updating the count to the game function ??
     if (deck.cards.length == 0) {
         getDeck()
         
@@ -74,32 +85,47 @@ function dealCard(person) {
     let card = deck.cards.pop()
     switch (person.hand.length) { // checks how many cards the person has to decide where to put the card
         case 0: 
+        switch (card.value){
+            case [1, 11]: card.value = 11; break; 
+        };
         person.hand.push(card);
         person.count += card.value;
-        person.DOM.c1.src = card.source
+        person.DOM.c1.src = card.source;
         break;
         case 1: 
+        if (person == dealer && card.value == [1, 11]) { // fix this || dealer's first ace equalls 11, subsequent aces equal 1
+            card.value = 1
+        };
         person.hand.push(card);
         person.count += card.value;
         switch (person === dealer){ // might make a faceDown function for this
             case true: person.DOM.c2.src = 'assets/images/facedown.png'; break;
             case false: person.DOM.c2.src = card.source; break;
-        }
+        };
         break;
         case 2: 
         switch (person === dealer) { // there could be a faceUp function as well
             case true: person.DOM.c2.src = person.hand[1].source; break;
-        }
+        };
+        if (person == dealer && card.value == [1, 11]) {
+            card.value = 1
+        };
         person.hand.push(card);
         person.count += card.value;
-        person.DOM.c3.src = card.source
+        person.DOM.c3.src = card.source;
         break;
         case 3: 
+        if (person == dealer && card.value == [1, 11]) {
+            card.value = 1
+        };
         person.hand.push(card);
         person.count += card.value;
         person.DOM.c4.src = card.source
         break;
         case 4: 
+        if (person == dealer && card.value == [1, 11]) {
+            card.value = 1
+        };
         person.hand.push(card);
         person.count += card.value;
         person.DOM.c5.src = card.source

@@ -10,13 +10,18 @@ main {
     flex-direction: column;
     background-color: rgba(177, 107, 15, 0.829);
     margin-left: 10px;
-    width: 7%;
-    height: auto;
+    width: 100px;
+    height: 170px;
+    
+}
+
+.hide {
+    display: "none"
 }
 
 .card {
-    width: 100%;
-    height: auto;
+    width: 100px;
+    height: 180px;
 }
 
 #buttom {

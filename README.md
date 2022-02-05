@@ -16,3 +16,11 @@ Bones(dominoes)
     - should I make a function to check a hand for an ace 
 - should I not update count in dealCard()? 
 - create image elements for cards in JS instead of HTML
+
+scenarios
+    Dealing card to dealer
+        - If the dealer's score is equal to 17 and Ace in their hand. Ace equals 1 and deal card. 
+          Else if dealer's score equals player's score, endGame(push)
+        - Dealer's score + card value is greater than 21 and Ace in their hand, Ace equals 1, deal card. Else Endgame(win)
+    Dealing card to player
+        - If the player's score + the card value is greater than 21 and Ace in their hand, Ace equals 1. Else endGame(lose)

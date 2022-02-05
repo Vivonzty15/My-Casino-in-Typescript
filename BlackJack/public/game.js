@@ -14,7 +14,7 @@ let game = {
 
 let dealer = {
     hand: [],
-    count: 0,
+    //score: calculateScore(dealer.hand),
     DOM: {
        c1: document.getElementById("d-1"),
        c2: document.getElementById("d-2"),
@@ -30,7 +30,7 @@ class player {
     constructor(name, playerID) {
         this.name = name
         this.money = 100
-        this.count = 0
+        //this.score = calculateScore(player1.hand)
         this.hand = []
         this.DOM = {
             c1: document.getElementById("p1-1"),
@@ -71,24 +71,17 @@ function setUp() {
         if (deck.cards.length == 0) {
             getDeck()
         }
-        if (game.betInput.value > player1.money){
+        if (game.betInput.value > player1.money || game.betInput.value < 10){
             return
         } else {
-            dealCard(player1)
+            dealCard(player1) 
             dealCard(dealer)
             dealCard(player1)
             dealCard(dealer)
-            if (dealer.count === 22) {
-                dealer.count -= 10
-            }
-            if (player1.count === 22){ //option for split
-                player1.count -= 10
-                game.betInput.disabled = true;
-                game.standButton.disabled = false;
-                game.hitButton.disabled = false;
-                game.startGameButton.disabled = true;
-                console.log('Game started')
-            } else if (player1.count === 21){
+            
+            if (calculateScore(player1.hand) === 22){ 
+                //option for split
+            } else if (calculateScore(player1.hand) === 21){
                 game.blackjack.style.display = "block"
                 console.log('Game started')
                 await time(5000)
@@ -101,25 +94,17 @@ function setUp() {
                 console.log('Game started')
             }
         }
-        console.log(player1)
-        console.log(dealer)
     })
 }
-
+        // deals a card to player
 function hit() {
     game.hitButton.addEventListener('click', async function () {
         dealCard(player1)
-    
-        for (i = 0; i < player1.hand.length; i++) { // for when there are multiple players- if I have each player in an array, could I put that array as an argument to check each of their hands for aces
-            if (player1.count > 21 && player1.hand[i].value === 11) {
-                player1.count -= 10
-            }
-        }
-            if (player1.count > 21 ) {
-                dealer.DOM.c2.src = dealer.hand[1].source
+            if (calculateScore(player1.hand) > 21){
                 disableButtons()
-                lose()
-            } else if (player1.count === 21) {
+                endGame(lose)
+                dealer.DOM.c2.src = dealer.hand[1].source
+            } else if (calculateScore(player1.hand) === 21) {
                 blackjack.style.display = "block"
                 disableButtons()
                 await time(3000)
@@ -129,77 +114,68 @@ function hit() {
     })
 }
 
+game.standButton.addEventListener('click', async function() {
+    disableButtons()
+    while (calculateScore(dealer.hand) < 17){
+        dealCard(dealer)
+    }
+    if ((calculateScore(dealer.hand) <= 21)&& calculateScore(dealer.hand) > calculateScore(player1.hand)){
+        dealer.DOM.c2.src = dealer.hand[1].source
+        endGame(lose)
+    } else if (calculateScore(dealer.hand) == calculateScore(player1.hand)) {
+        dealer.DOM.c2.src = dealer.hand[1].source
+        endGame(push)
+    } else {
+        dealer.DOM.c2.src = dealer.hand[1].source
+        endGame(win)
+    }
+})
+
+    // only runs if player has 21
 function stand() {
-    game.standButton.addEventListener('click', async function() {
-        disableButtons()
-        while (dealer.count < 17){
+    //disableButtons()
+    while(calculateScore(dealer.hand) < 17) {  
+        dealCard(dealer)
+    }
+    for (i = 0; i < dealer.hand.length; i++) {
+        if(calculateScore(dealer.hand) === 17 && dealer.hand[i].value === 11){
+            dealer.hand[i].value = 1
             dealCard(dealer)
-        }
-        while (dealer.hand.length === 2) {
-            if(dealer.count === 22) {
-                dealer.count -= 10
-                dealCard(dealer)
-            }
-        }
-        for (i = 0; i < dealer.hand.length; i++) {
-            if (dealer.count === 17 || dealer.count > 21 && dealer.hand[i].value === 11){
-                dealer.count -= 10
-                while (dealer.count < 17) {
-                dealCard(dealer)
-                }
-            }
-        }
-        if ((dealer.count <= 21)&& dealer.count > player1.count){
+        } else if (calculateScore(dealer.hand) === calculateScore(player1.hand)) {
             dealer.DOM.c2.src = dealer.hand[1].source
-            lose()
-        } else if (dealer.count == player1.count) {
-            dealer.DOM.c2.src = dealer.hand[1].source
-            console.log('stuck')
-            push()
+            endGame(push)
         } else {
             dealer.DOM.c2.src = dealer.hand[1].source
-            win()
+            console.log('stuck')
+            endGame(win)
         }
-    })
-    while(dealer.hand.length === 2) {  // will this run regardless of the click?
-        for (i = 0; i < 2; i++) {
-        if(player1.count === dealer.count && player1.count === 17 && dealer.hand[i].value === 11){
-            dealer.count -= 10
-            dealCard(dealer)
-            push()
-        } else if(player1.count === 21) {
-            dealer.DOM.c2.src = dealer.hand[1].source
-            console.log(stuck)
-            win()
-        }
-    }
-    
     }
 }
 
-async function win() {
+split() {
+    
+}
+
+
+function win() {
     game.win.style.display = "block"
     player1.money += Number(game.betInput.value)
-    await time(5000)
-    setUp()
 }
 
-async function lose() {
+function lose() {
     game.lose.style.display = "block"
     player1.money -= Number(game.betInput.value)
-    await time(5000)
-    setUp()
 }
 
-async function push() {
+function push() {
     game.push.style.display = "block"
-    await time(5000)
-    setUp()
 }
 
-function endGame(callback) { //callback is either win, lose, or push
+async function endGame(decision) { //callback is either win, lose, or push
     // contains the code that happens when the game ends
-    callback
+    decision()
+    await time(5000)
+    setUp()
 }
 
 function time(seconds) {            // allows a five second break inbetween lines of code

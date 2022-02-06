@@ -8,10 +8,10 @@ Bones(dominoes)
 7-card gin
 
 
+
+
 <b>bugs to fix:</b>
 - what happens when dealer or player gets dealt two aces
-    -ace equals [1, 11] now.
-    -dealers first ace equals 11, the rest equal 1
     -not sure how to fix players ace issue
     - should I make a function to check a hand for an ace 
 - should I not update count in dealCard()? 
@@ -24,3 +24,8 @@ scenarios
         - Dealer's score + card value is greater than 21 and Ace in their hand, Ace equals 1, deal card. Else Endgame(win)
     Dealing card to player
         - If the player's score + the card value is greater than 21 and Ace in their hand, Ace equals 1. Else endGame(lose)
+
+<b>fixed:</b>
+- creating card images dynamically
+- determining ace value
+- 

@@ -21,6 +21,9 @@ class card {
     getImage() {
         let image = document.createElement('img')
         image.src = this.source
+        image.id = "card"
+        image.style.width = '100px'
+        image.style.height = '180px'
         return image
     }
 }
@@ -77,74 +80,68 @@ function shuffle(array) {
     return array
 }
 
-function dealCard(person) {                     // should I leave updating the count to the game function ??
+function dealCard(person) {
     if (deck.cards.length == 0) {
         getDeck()
 
     }
     let card = deck.cards.pop()
+    let faceDown = document.createElement('img')
+    faceDown.src = 'assets/images/facedown.png'
+    faceDown.id = 'card'
+    faceDown.style.width = '100px'
+    faceDown.style.height = '180px'
     console.log(person)
     switch (person.hand.length) { // checks how many cards the person has to decide where to put the card
         case 0:
             person.hand.push(card);
-            //person.count += card.value;
-            person.DOM.c1.src = card.source;
+            person.image.c1.appendChild(card.image)
             break;
         case 1:
-            //checkHandForAce(dealer, card);
-            //checkHandForAce(player1, card);
             person.hand.push(card);
-            //person.count += card.value;
             switch (person) { // might make a faceDown function for this
-                case dealer: person.DOM.c2.src = 'assets/images/facedown.png'; break;
-                case player1: person.DOM.c2.src = card.source; break;
+                case dealer: person.image.c2.appendChild(faceDown); break;
+                case player1: person.image.c2.appendChild(card.image); break;
             };
             break;
         case 2:
             switch (person) { // there could be a faceUp function as well
-                case dealer: person.DOM.c2.src = person.hand[1].source; break;
+                case dealer: person.image.c2.innerHTML = ''
+                    person.image.c3.appendChild(person.hand[1].image); break;
             };
 
-            //checkHandForAce(dealer, card);
-            //checkHandForAce(player1, card);
             person.hand.push(card);
-            //person.count += card.value;
-            person.DOM.c3.src = card.source;
+            person.image.c3.appendChild(card.image)
             break;
         case 3:
-            //checkHandForAce(dealer, card);
-            //checkHandForAce(player1, card);
             person.hand.push(card);
-            //person.count += card.value;
-            person.DOM.c4.src = card.source
+            person.image.c4.appendChild(card.image)
             break;
         case 4:
-            //checkHandForAce(dealer, card);
-            //checkHandForAce(player1, card);
             person.hand.push(card);
-            //person.count += card.value;
-            person.DOM.c5.src = card.source
+            person.image.c5.appendChild(card.image)
             break;
         default:
+            console.log(person.hand.length)
             console.log('no room for another card')
             console.log(person)
     }
     console.log(person)
 }
 
-function checkHandForAce(person, card) {
-    for (i = 0; i < person.hand.length; i++) {
-        if (card.value === 11 & person.count > 10) {
-            console.log(card.value)
-            card.value = 1
-            console.log(card.value)
-        } else if ((person.count + card.value) > 21 && person.hand[i].value === 11) {
-            console.log(person.hand[i].value)
-            person.hand[i].value = 1
-            console.log(person.hand[i].value)
-        }
-    }
-}
+// function checkHandForAce(person, card) {
+//     for (i = 0; i < person.hand.length; i++) {
+//         if (card.value === 11 & person.count > 10) {
+//             console.log(card.value)
+//             card.value = 1
+//             console.log(card.value)
+//         } else if ((person.count + card.value) > 21 && person.hand[i].value === 11) {
+//             console.log(person.hand[i].value)
+//             person.hand[i].value = 1
+//             console.log(person.hand[i].value)
+//         }
+//     }
+// }
 
 function calculateScore(hand) {
     let notAceTotal = 0

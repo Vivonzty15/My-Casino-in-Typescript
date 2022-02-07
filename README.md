@@ -16,6 +16,10 @@ Bones(dominoes)
     - should I make a function to check a hand for an ace 
 - should I not update count in dealCard()? 
 - create image elements for cards in JS instead of HTML
+- add a split function
+    - add dealSplitCard(), split.hand object, and variables for the card holders
+    - Can I reuse existing code?
+    - Can I use existing buttons for multiple purposes?
 
 scenarios
     Dealing card to dealer

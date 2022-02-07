@@ -69,29 +69,14 @@
             <div class="d-flex flex-wrap justify-content-center">
                 <h2 id="splitHand"><b>Split Hand</b></h2>
             </div>
-            <div class="d-flex flex-wrap justify-content-center py-2 mb-2" id="player1-Split-Card">
-                <div class="card_holder player1-Split-Card" id="ps1">
-                    <!--give each card holder a unique ID in order to dynamically add each image to the correct div-->
-
-                </div>
-                <div class="card_holder player1-Split-Card" id="ps2">
-
-                </div>
-                <div class="card_holder player1-Split-Card" id="ps3">
-
-                </div>
-                <div class="card_holder player1-Split-Card" id="ps4">
-
-                </div>
-                <div class="card_holder player1-Split-Card" id="ps5">
-
-                </div>
+            <div class="d-flex flex-wrap justify-content-center py-2 mb-2" id="Split-Parent">
+                
             </div>
 
             <div id="bottom" class="d-flex flex-column">
 
-                <div>
-                    <h3>Your cash:</h3>
+                <div id="bank">
+                    <h3><b> Your Cash:</b></h3>
                     <h4 id="money"></h4>
                 </div>
 
@@ -107,7 +92,7 @@
                     </div>
                 </div>
                 <div id="bet">
-                    <h3>Your Bet</h3>
+                    <h3><b> Your Bet</b></h3>
                     <input id="bet-amt" size="9" type="text">
                 </div>
             </div>
@@ -125,6 +110,7 @@
     <script src="/BlackJack/public/cards.js"></script>
     <script src="/BlackJack/public/displayCards.js"></script>
     <script src="/BlackJack/public/game.js"></script>
+    <script src="/BlackJack/public/split.js"></script>
     <script src="/BlackJack/public/index.js"></script>
 </body>
 

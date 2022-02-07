@@ -19,7 +19,7 @@ main {
     display: "none"
 }
 
-.card {
+#card {
     width: 100px;
     height: 180px;
 }
@@ -27,4 +27,23 @@ main {
 #buttom {
     width: 100%;
     background-color: azure;
+}
+
+#message{
+    position: fixed;
+    top: 40px;
+    left: 10px;
+    width: 100px
+}
+
+#bet{
+    position: fixed;
+    top: 500px;
+    left: 10px
+}
+
+#bank{
+    position: fixed;
+    top: 400px;
+    left: 10px
 }

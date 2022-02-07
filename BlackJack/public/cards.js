@@ -22,8 +22,6 @@ class card {
         let image = document.createElement('img')
         image.src = this.source
         image.id = "card"
-        image.style.width = '100px'
-        image.style.height = '180px'
         return image
     }
 }
@@ -80,17 +78,23 @@ function shuffle(array) {
     return array
 }
 
+function fiveDeck(){
+    getDeck()
+    getDeck()
+    getDeck()
+    getDeck()
+    getDeck()
+}
+
 function dealCard(person) {
     if (deck.cards.length == 0) {
-        getDeck()
+        fiveDeck()
 
     }
     let card = deck.cards.pop()
     let faceDown = document.createElement('img')
     faceDown.src = 'assets/images/facedown.png'
     faceDown.id = 'card'
-    faceDown.style.width = '100px'
-    faceDown.style.height = '180px'
     console.log(person)
     switch (person.hand.length) { // checks how many cards the person has to decide where to put the card
         case 0:
@@ -129,19 +133,9 @@ function dealCard(person) {
     console.log(person)
 }
 
-// function checkHandForAce(person, card) {
-//     for (i = 0; i < person.hand.length; i++) {
-//         if (card.value === 11 & person.count > 10) {
-//             console.log(card.value)
-//             card.value = 1
-//             console.log(card.value)
-//         } else if ((person.count + card.value) > 21 && person.hand[i].value === 11) {
-//             console.log(person.hand[i].value)
-//             person.hand[i].value = 1
-//             console.log(person.hand[i].value)
-//         }
-//     }
-// }
+function dealSplitCard() {
+
+}
 
 function calculateScore(hand) {
     let notAceTotal = 0
@@ -149,7 +143,6 @@ function calculateScore(hand) {
     let total
     for (i = 0; i < hand.length; i++) {
         if (hand[i].value === 11) { continue }
-
         notAceTotal += hand[i].value
 
     }

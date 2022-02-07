@@ -6,8 +6,6 @@ let game = {
     standButton: document.getElementById("stand"),
     startGameButton: document.getElementById("new-game"),
     splitButton: document.getElementById("split"),
-    splitTitle: document.getElementById('splitHand'),
-    player1SplitHand: document.getElementById('player1-Split-Card'),
     win: document.getElementById("win"),
     lose: document.getElementById('lose'),
     push: document.getElementById('push'),
@@ -51,9 +49,11 @@ player1 = new player("p1", "p1")
 //set up game
 function setUp() {
     emptyHand()
-    dealer.count = 0
-    player1.count = 0
-    game.money.textContent = "$" + player1.money;
+    if (player1.money < 10) {
+        game.money.textContent = "BUSTED"
+    } else {
+    game.money.textContent = "$" + player1.money
+    }
     game.betInput.value = 10;
     game.betInput.disabled = false;
     game.standButton.disabled = true;
@@ -64,17 +64,14 @@ function setUp() {
     game.lose.style.display = "none"
     game.push.style.display = "none"
     game.blackjack.style.display = "none"
-    game.splitTitle.style.display = "none"
-    game.player1SplitHand.style.display = "none"
-    getDeck()
+    split.splitTitle.style.display = "none"
+    fiveDeck()
 }
+
 
 //start game
 function newGame() {
     game.startGameButton.addEventListener('click', async function () {
-        if (deck.cards.length == 0) {
-            getDeck()
-        }
         if (game.betInput.value > player1.money || game.betInput.value < 10) {
             return
         } else {
@@ -83,9 +80,11 @@ function newGame() {
             dealCard(player1)
             dealCard(dealer)
 
-            if (calculateScore(player1.hand) === 22) {
-                //option for split
-            } else if (calculateScore(player1.hand) === 21) {
+            if (player1.hand[0].value === player1.hand[1].value) {
+                splitButton.disabled = false // a work in progress
+            }
+
+            if (calculateScore(player1.hand) === 21) {
                 game.blackjack.style.display = "block"
                 disableButtons()
                 console.log('Game started')
@@ -116,12 +115,12 @@ function hit() {
             disableButtons()
             await time(3000)
             console.log('stuck')
-            stand()
+            stand(player1.hand)
         }
     })
 }
 
-game.standButton.addEventListener('click', async function () {
+game.standButton.addEventListener('click', function () {
     disableButtons()
     while (calculateScore(dealer.hand) < 17) {
         dealCard(dealer)
@@ -143,31 +142,21 @@ game.standButton.addEventListener('click', async function () {
 
 // only runs if player has 21
 function stand() {
-    //disableButtons()
     while (calculateScore(dealer.hand) < 17) {
         dealCard(dealer)
     }
-    for (i = 0; i < dealer.hand.length; i++) {
-        if (calculateScore(dealer.hand) === 17 && dealer.hand[i].value === 11) {
-            dealer.hand[i].value = 1
-            dealCard(dealer)
-        } else if (calculateScore(dealer.hand) === calculateScore(player1.hand)) {
-            dealer.image.c2.innerHTML = ''
-            dealer.image.c2.appendChild(dealer.hand[1].image)
-            endGame(push)
-        } else {
-            dealer.image.c2.innerHTML = ''
-            dealer.image.c2.appendChild(dealer.hand[1].image)
-            console.log('stuck')
-            endGame(win)
-        }
+
+    if (calculateScore(dealer.hand) === calculateScore(player1.hand)) {
+        dealer.image.c2.innerHTML = ''
+        dealer.image.c2.appendChild(dealer.hand[1].image)
+        endGame(push)
+    } else {
+        dealer.image.c2.innerHTML = ''
+        dealer.image.c2.appendChild(dealer.hand[1].image)
+        console.log('stuck')
+        endGame(win)
     }
 }
-
-function split() {
-
-}
-
 
 function win() {
     game.win.style.display = "block"
@@ -199,6 +188,7 @@ function time(seconds) {            // allows a five second break inbetween line
 }
 
 function emptyHand() {
+    // clears previous cards from the board
     player1.hand = []
     dealer.hand = []
     player1.image.c1.innerHTML = ''

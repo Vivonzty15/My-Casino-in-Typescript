@@ -31,9 +31,9 @@ main {
 
 #message{
     position: fixed;
-    top: 40px;
+    top: 60px;
     left: 10px;
-    width: 100px
+    width: 25%
 }
 
 #bet{

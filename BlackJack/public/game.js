@@ -52,7 +52,7 @@ function setUp() {
     if (player1.money < 10) {
         game.money.textContent = "BUSTED"
     } else {
-    game.money.textContent = "$" + player1.money
+        game.money.textContent = "$" + player1.money
     }
     game.betInput.value = 10;
     game.betInput.disabled = false;
@@ -80,9 +80,9 @@ function newGame() {
             dealCard(player1)
             dealCard(dealer)
 
-            if (player1.hand[0].value === player1.hand[1].value) {
-                splitButton.disabled = false // a work in progress
-            }
+            //if (player1.hand[0].value === player1.hand[1].value) {
+            //    splitButton.disabled = false // a work in progress
+            //}
 
             if (calculateScore(player1.hand) === 21) {
                 game.blackjack.style.display = "block"
@@ -158,6 +158,14 @@ function stand() {
     }
 }
 
+// async function json() {
+//     let response =  await fetch('http://127.0.0.1:9901/money')
+//     let jsonObject =  await response.json()
+//     console.log(jsonObject)
+//     countValue = jsonObject.value
+//}
+//json()
+
 function win() {
     game.win.style.display = "block"
     player1.money += Number(game.betInput.value)
@@ -166,6 +174,9 @@ function win() {
 function lose() {
     game.lose.style.display = "block"
     player1.money -= Number(game.betInput.value)
+    if (player1.money < 10) {
+        player1.money.textContent = "BUSTED"
+    }
 }
 
 function push() {

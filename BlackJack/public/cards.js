@@ -22,6 +22,7 @@ class card {
         let image = document.createElement('img')
         image.src = this.source
         image.id = "card"
+        image.setAttribute("draggable", true)
         return image
     }
 }
@@ -93,7 +94,7 @@ function dealCard(person) {
     }
     let card = deck.cards.pop()
     let faceDown = document.createElement('img')
-    faceDown.src = 'assets/images/facedown.png'
+    faceDown.src = 'BlackJack/public/assets/images/facedown.png'
     faceDown.id = 'card'
     console.log(person)
     switch (person.hand.length) { // checks how many cards the person has to decide where to put the card

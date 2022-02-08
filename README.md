@@ -1,23 +1,40 @@
+<h1>My Casino</h1>
+
 This is going to be a collection of my favorite games, starting with black jack.
 
-I would like to make them multiplayer and able to play with/against AI.
+<b>BlackJack Rules:</b>
+- Aces can be worth 11 points or 1.
+- Face cards are worth 10.
+- Points for the rest of the cards correspond with their value.
+- The game starts out with 5 decks (256 cards).
+- They are all shuffled together randomly.
+- Before each game you can decide how much money you want to bet.
+- At the start of each game you are dealt two cards and the dealer is dealt two, but you can only see their first card. 
+    - If your two cards have the same value, you can split(still working on this function)
+    - If you get 21 point, you win the amount of money you bet.
+    - If not you can hit(take another card), or stand(end your turn). If you go over 21 points, you lose your bet.
+- When you stand the dealer turns over their second card.
+    - The dealer will deal a card to themselves while their points are less than 17.
+    - If they have 17 point with an ace (ex. a six and ace) it is considered a soft 17. They deal a card to themselves on a soft 17. 
+    - If they end up with more points than you, you lose.
+    - If they end up with the same amount of points as you, you push (neither win money nor lose money)
+    - If they go over 21 you win. 
 
-Some more games I would like to add:
+<b>Some more games I would like to add:</b>
 Texas Holdem
 Bones(dominoes)
 7-card gin
-
+Dice games
 
 
 
 <b>bugs to fix:</b>
 - what happens when dealer or player gets dealt two aces
-    -not sure how to fix players ace issue
-    - should I make a function to check a hand for an ace 
-- should I not update count in dealCard()? 
-- create image elements for cards in JS instead of HTML
-- add a split function
-    - add dealSplitCard(), split.hand object, and variables for the card holders
+    -Not sure how to fix players ace issue
+    - Should I make a function to check a hand for an ace 
+- Should I not update count in dealCard()? 
+- Create image elements for cards in JS instead of HTML
+- Add a split function
     - Can I reuse existing code?
     - Can I use existing buttons for multiple purposes?
 

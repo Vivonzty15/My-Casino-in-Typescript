@@ -1,4 +1,4 @@
-#My Casino#
+# My Casino #
 
 This is going to be a collection of my favorite games, starting with black jack.
 
@@ -26,7 +26,7 @@ Bones(dominoes)
 7-card gin
 Dice games
 
-##Timeline##
+## Timeline ##
 
 * Created all my files, index.html, index.js, BlackJack.html etc.
 * Created card class, created cards, added them to a deck, and shuffled the deck with functions. 

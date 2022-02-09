@@ -21,36 +21,42 @@ This is going to be a collection of my favorite games, starting with black jack.
     * If they go over 21 you win. 
 
 <b>Some more games I would like to add:</b>
-Texas Holdem
-Bones(dominoes)
-7-card gin
-Dice games
+* Texas Holdem
+* Bones(dominoes)
+* 7-card gin
+* Dice games
 
 ## Timeline ##
 
 * Created all my files, index.html, index.js, BlackJack.html etc.
+* Outlined my HTML files
+* Styled them with bootstrap and an internal stylesheet
+* Outlined my project in my JS files
 * Created card class, created cards, added them to a deck, and shuffled the deck with functions. 
-* 
+* Created a player class to keep track of their hand, score, name, and money
+* Created dealer object to keep track of their hand
 
 <b>bugs to fix:</b>
+* Dealing cards
+    * How does the browser know where to put the card
+* Score is updating to NAN
 * what happens when dealer or player gets dealt two aces
-    *Not sure how to fix players ace issue
+    * If dealer has 17 with an ace, the ace's value should change to 1
+    * Not sure how to fix players ace issue
     * Should I make a function to check a hand for an ace 
 * Should I not update count in dealCard()? 
 * Create image elements for cards in JS instead of HTML
+* calculateScore() returns 22 with two aces
+* How to get the user's name
 * Add a split function
     * Can I reuse existing code?
     * Can I use existing buttons for multiple purposes?
 
-scenarios
-    Dealing card to dealer
-        * If the dealer's score is equal to 17 and Ace in their hand. Ace equals 1 and deal card. 
-          Else if dealer's score equals player's score, endGame(push)
-        * Dealer's score + card value is greater than 21 and Ace in their hand, Ace equals 1, deal card. Else Endgame(win)
-    Dealing card to player
-        * If the player's score + the card value is greater than 21 and Ace in their hand, Ace equals 1. Else endGame(lose)
-
 <b>fixed:</b>
-* creating card images dynamically
-* determining ace value
-* 
+* Dealt cards with dealCard() function in card.js
+* Fixed scoring using Number(value) 
+* Created card images dynamically
+* Got rid of count. Created calculateScore() function in cards.js
+* Determined ace value with calculateScore()
+* Added code to calculateScore() to check for two aces
+* Added users name with prompt. 

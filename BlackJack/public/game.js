@@ -2,9 +2,11 @@ let game = {
     money: document.getElementById('money'),
     betInput: document.getElementById("bet-amt"),
     inGame: false,
+    playerName: document.getElementById("playerName"),
     hitButton: document.getElementById("hit"),
     standButton: document.getElementById("stand"),
     startGameButton: document.getElementById("new-game"),
+    doubleButton: document.getElementById('dbl'),
     splitButton: document.getElementById("split"),
     win: document.getElementById("win"),
     lose: document.getElementById('lose'),
@@ -43,31 +45,40 @@ class player {
     }
 }
 
+let player_name = prompt("What's your name?","");
+
 let player1
-player1 = new player("p1", "p1")
+player1 = new player(player_name, "p1")
 
 //set up game
 function setUp() {
     emptyHand()
+    if (deck.cards.length === 0) {
+        fiveDeck()
+    }
     if (player1.money < 10) {
         game.money.textContent = "BUSTED"
     } else {
         game.money.textContent = "$" + player1.money
     }
+    game.playerName.textContent = player1.name +"'s Hand"
     game.betInput.value = 10;
     game.betInput.disabled = false;
     game.standButton.disabled = true;
     game.hitButton.disabled = true;
     game.startGameButton.disabled = false;
+    game.doubleButton.disabled = true;
     game.splitButton.disabled = true;
     game.win.style.display = "none"
     game.lose.style.display = "none"
     game.push.style.display = "none"
     game.blackjack.style.display = "none"
     split.splitTitle.style.display = "none"
-    fiveDeck()
 }
 
+game.doubleButton.addEventListener('click', function () {
+    game.betInput.value = game.betInput.value * 2
+})
 
 //start game
 function newGame() {
@@ -97,6 +108,9 @@ function newGame() {
                 game.hitButton.disabled = false;
                 game.startGameButton.disabled = true;
                 console.log('Game started')
+                if ((game.betInput.value * 2) < player1.money){
+                    game.doubleButton.disabled = false;
+                }
             }
         }
     })
@@ -104,6 +118,7 @@ function newGame() {
 // deals a card to player
 function hit() {
     game.hitButton.addEventListener('click', async function () {
+        game.doubleButton.disabled = true;
         dealCard(player1)
         if (calculateScore(player1.hand) > 21) {
             disableButtons()
@@ -219,4 +234,5 @@ function disableButtons() {
     game.hitButton.disabled = true;
     game.startGameButton.disabled = true;
     game.splitButton.disabled = true;
+    game.doubleButton.disabled = true;
 }

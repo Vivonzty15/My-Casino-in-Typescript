@@ -88,7 +88,7 @@ function fiveDeck(){
 }
 
 function dealCard(person) {
-    if (deck.cards.length == 0) {
+    if (deck.cards.length === 0) {
         fiveDeck()
 
     }
@@ -174,6 +174,11 @@ function calculateScore(hand) {
                 console.log(hand[i].value)
                 aceTotal += hand[i].value
             }
+        }
+        if ((aceTotal + notAceTotal) > 21) {
+            hand[i].value = 1
+            aceTotal -= 11
+            aceTotal += hand[i].value
         }
     }
 

@@ -73,7 +73,6 @@ function setUp() {
     game.lose.style.display = "none"
     game.push.style.display = "none"
     game.blackjack.style.display = "none"
-    split.splitTitle.style.display = "none"
 }
 
 game.doubleButton.addEventListener('click', function () {

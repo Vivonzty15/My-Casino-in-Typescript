@@ -1,6 +1,8 @@
 # My Casino #
 
 This is going to be a collection of my favorite games, starting with black jack.
+The inspiration for this was my passion for card games. Ever since I can remember I have been playing card games with my family. <br></br>
+My grandmother was a math teacher, so she made it fun for me to learn math when I was a child by teaching me card games.
 
 <b>BlackJack Rules:</b>
 * Aces can be worth 11 points or 1.
@@ -24,6 +26,8 @@ This is going to be a collection of my favorite games, starting with black jack.
 * Texas Holdem
 * Bones(dominoes)
 * 7-card gin
+* Bridge
+* Solitaire
 * Dice games
 
 ## Timeline ##

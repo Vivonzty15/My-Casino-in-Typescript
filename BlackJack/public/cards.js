@@ -58,7 +58,7 @@ function getDeck() {
                 case 'king': count = 10; break;
                 default: console.log('cant update count')
             }
-            eachCard = new card(count, `/BlackJack/public/assets/images/${cardCreator.values[v]}_of_${cardCreator.suits[s]}.png`)
+            eachCard = new card(count, `BlackJack/public/assets/images/${cardCreator.values[v]}_of_${cardCreator.suits[s]}.png`)
             //deck.source.push(`/BlackJack/public/assets/images/${cardCreator.values[v]}_of_${cardCreator.suits[s]}.png`)
             deck.cards.push(eachCard)
         }

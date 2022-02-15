@@ -1,6 +1,6 @@
 # My Casino #
 
-This is going to be a collection of my favorite games, starting with black jack.
+This is going to be a collection of my favorite games, starting with black jack. <br></br>
 The inspiration for this was my passion for card games. Ever since I can remember I have been playing card games with my family. <br></br>
 My grandmother was a math teacher, so she made it fun for me to learn math when I was a child by teaching me card games.
 
@@ -13,7 +13,8 @@ My grandmother was a math teacher, so she made it fun for me to learn math when 
 * Before each game you can decide how much money you want to bet.
 * At the start of each game you are dealt two cards and the dealer is dealt two, but you can only see their first card. 
     * If your two cards have the same value, you can split(still working on this function)
-    * If you get 21 point, you win the amount of money you bet.
+    * After you get your first two cards, you can double down your bet. 
+    * If you get 21 points, you win the amount of money you bet.
     * If not you can hit(take another card), or stand(end your turn). If you go over 21 points, you lose your bet.
 * When you stand the dealer turns over their second card.
     * The dealer will deal a card to themselves while their points are less than 17.

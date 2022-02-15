@@ -50,6 +50,8 @@ let player_name = prompt("What's your name?","");
 let player1
 player1 = new player(player_name, "p1")
 
+
+
 //set up game
 function setUp() {
     emptyHand()
@@ -79,10 +81,14 @@ game.doubleButton.addEventListener('click', function () {
     game.betInput.value = game.betInput.value * 2
 })
 
+let re = new RegExp("/\D/")
+
 //start game
 function newGame() {
+    let re = new RegExp("^[0-9]*$")
+
     game.startGameButton.addEventListener('click', async function () {
-        if (game.betInput.value > player1.money || game.betInput.value < 10) {
+        if (game.betInput.value > player1.money || game.betInput.value < 10 || re.test(game.betInput.value) == false) {
             return
         } else {
             dealCard(player1)
@@ -93,7 +99,8 @@ function newGame() {
             //if (player1.hand[0].value === player1.hand[1].value) {
             //    splitButton.disabled = false // a work in progress
             //}
-
+    
+    console.log(re.test(game.betInput.value))
             if (calculateScore(player1.hand) === 21) {
                 game.blackjack.style.display = "block"
                 disableButtons()
@@ -128,7 +135,6 @@ function hit() {
             blackjack.style.display = "block"
             disableButtons()
             await time(3000)
-            console.log('stuck')
             stand(player1.hand)
         }
     })
@@ -167,7 +173,6 @@ function stand() {
     } else {
         dealer.image.c2.innerHTML = ''
         dealer.image.c2.appendChild(dealer.hand[1].image)
-        console.log('stuck')
         endGame(win)
     }
 }

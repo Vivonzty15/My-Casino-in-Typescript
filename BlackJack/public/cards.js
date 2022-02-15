@@ -58,7 +58,7 @@ function getDeck() {
                 case 'king': count = 10; break;
                 default: console.log('cant update count')
             }
-            eachCard = new card(count, `BlackJack/public/assets/images/${cardCreator.values[v]}_of_${cardCreator.suits[s]}.png`)
+            eachCard = new card(count, `./BlackJack/public/assets/images/${cardCreator.values[v]}_of_${cardCreator.suits[s]}.png`)
             //deck.source.push(`/BlackJack/public/assets/images/${cardCreator.values[v]}_of_${cardCreator.suits[s]}.png`)
             deck.cards.push(eachCard)
         }
@@ -94,9 +94,8 @@ function dealCard(person) {
     }
     let card = deck.cards.pop()
     let faceDown = document.createElement('img')
-    faceDown.src = 'BlackJack/public/assets/images/facedown.png'
+    faceDown.src = './BlackJack/public/assets/images/facedown.png'
     faceDown.id = 'card'
-    console.log(person)
     switch (person.hand.length) { // checks how many cards the person has to decide where to put the card
         case 0:
             person.hand.push(card);
@@ -127,11 +126,8 @@ function dealCard(person) {
             person.image.c5.appendChild(card.image)
             break;
         default:
-            console.log(person.hand.length)
             console.log('no room for another card')
-            console.log(person)
     }
-    console.log(person)
 }
 
 function dealSplitCard() {
@@ -151,27 +147,19 @@ function calculateScore(hand) {
         if (hand[i].value !== 11) { continue }
         if (hand == dealer.hand) {
             if ((notAceTotal + hand[i].value) > 21) {
-                console.log(hand[i].value)
                 hand[i].value = 1
-                console.log(hand[i].value)
                 aceTotal += hand[i].value
             } else if ((notAceTotal + hand[i].value) === 17) {
-                console.log(hand[i].value)
                 hand[i].value = 1
-                console.log(hand[i].value)
                 aceTotal += hand[i].value
             } else {
-                console.log(hand[i].value)
                 aceTotal += hand[i].value
             }
         } else if (hand == player1.hand) {
             if ((notAceTotal + hand[i].value) > 21) {
-                console.log(hand[i].value)
                 hand[i].value = 1
-                console.log(hand[i].value)
                 aceTotal += hand[i].value
             } else {
-                console.log(hand[i].value)
                 aceTotal += hand[i].value
             }
         }
@@ -183,7 +171,6 @@ function calculateScore(hand) {
     }
 
     total = notAceTotal + aceTotal
-    console.log(total)
 
     return total
 }

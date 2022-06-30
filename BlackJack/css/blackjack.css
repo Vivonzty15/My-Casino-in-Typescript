@@ -1,0 +1,9 @@
+
+.hide {
+    display: "none"
+}
+
+#card {
+    width: 100px;
+    height: 180px;
+}

@@ -1,0 +1,25 @@
+{
+  "name": "milestone-project-1",
+  "version": "1.0.0",
+  "description": "BlackJack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch" : "sass -w BlackJack/scss/style.scss:BlackJack/css/style.css "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vivonzty15/My-Casino.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vivonzty15/My-Casino/issues"
+  },
+  "homepage": "https://github.com/Vivonzty15/My-Casino#readme",
+  "dependencies": {
+    "cross-spawn": "^7.0.3",
+    "json-server": "^0.17.0",
+    "live-server": "^1.2.1"
+  }
+}

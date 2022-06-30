@@ -1,0 +1,142 @@
+@import "config";
+
+body {
+    background-color: $primary-color;
+}
+
+main {
+    width: 100%;
+    padding-right: var(--bs-gutter-x, .75rem);
+    padding-left: var(--bs-gutter-x, .75rem);
+    margin-top: 30px;
+    margin-right: auto;
+    margin-left: auto;
+
+    nav {
+        display: flex;
+        align-items: center;
+        --bs-bg-opacity: 1;
+        background-color: $dark;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+
+        *,
+        ::after,
+        ::before {
+            box-sizing: border-box;
+        }
+
+        a {
+            @include link-color;
+            padding-top: 0.3125rem;
+            padding-bottom: 0.3125rem;
+            padding-left: 0.3125rem;
+            margin-right: 1rem;
+            font-size: 1.25rem;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .navbar-coll {
+            display: flex;
+            flex-basis: auto;
+            flex-grow: 1;
+            align-items: center;
+
+            a {
+                @include link-color;
+            }
+
+            ul {
+                display: flex;
+                list-style: none;
+                margin-block-start: 1em;
+                margin-block-end: 1em;
+                margin-inline-start: 0px;
+                margin-inline-end: 0px;
+                padding-inline-start: 40px;
+            }
+        }
+    }
+
+    .board {
+        width: 100%;
+        padding-right: var(--bs-gutter-x, .75rem);
+        padding-left: var(--bs-gutter-x, .75rem);
+        margin-right: auto;
+        margin-left: auto;
+
+        .dealer {
+            @include card-hands;
+            padding-top: 3.8rem;
+        }
+
+        .dealer-hand {
+            @include card-hands;
+            @include py-2;
+        }
+
+        .player {
+            @include card-hands;
+        }
+
+        .player-hand {
+            @include card-hands;
+            @include py-2;
+        }
+
+        .card_holder {
+            flex-direction: column;
+            background-color: rgba(177, 107, 15, 0.829);
+            margin-left: 10px;
+            margin-top: 20px;
+            width: 100px;
+            height: 170px;
+
+        }
+    }
+
+    .bottom {
+        flex-direction: column;
+        display: flex;
+
+        #bank {
+            position: fixed;
+            top: 400px;
+            left: 10px
+        }
+
+        #bet {
+            position: fixed;
+            top: 500px;
+            left: 10px
+        }
+
+        .controls {
+            align-items: center;
+            flex-direction: column;
+            display: flex;
+
+            *.button {
+                @include button
+            }
+
+
+
+        }
+
+
+    }
+
+    #message {
+        color: white;
+        position: fixed;
+        top: 80px;
+        left: 10px;
+        width: 25%
+    }
+
+}

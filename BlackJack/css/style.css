@@ -1,0 +1,166 @@
+body {
+  background-color: rgb(148, 86, 4);
+}
+
+main {
+  width: 100%;
+  padding-right: var(--bs-gutter-x, 0.75rem);
+  padding-left: var(--bs-gutter-x, 0.75rem);
+  margin-top: 30px;
+  margin-right: auto;
+  margin-left: auto;
+}
+main nav {
+  display: flex;
+  align-items: center;
+  --bs-bg-opacity: 1;
+  background-color: rgb(33, 37, 41);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+main nav *,
+main nav ::after,
+main nav ::before {
+  box-sizing: border-box;
+}
+main nav a {
+  color: white;
+  padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;
+  padding-left: 0.3125rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+main nav a:hover {
+  color: rgb(148, 86, 4);
+}
+main nav .navbar-coll {
+  display: flex;
+  flex-basis: auto;
+  flex-grow: 1;
+  align-items: center;
+}
+main nav .navbar-coll a {
+  color: white;
+}
+main nav .navbar-coll a:hover {
+  color: rgb(148, 86, 4);
+}
+main nav .navbar-coll ul {
+  display: flex;
+  list-style: none;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+main .board {
+  width: 100%;
+  padding-right: var(--bs-gutter-x, 0.75rem);
+  padding-left: var(--bs-gutter-x, 0.75rem);
+  margin-right: auto;
+  margin-left: auto;
+}
+main .board .dealer {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 3.8rem;
+}
+main .board .dealer *, main .board .dealer ::after, main .board .dealer ::before {
+  box-sizing: border-box;
+}
+main .board .dealer-hand {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+main .board .dealer-hand *, main .board .dealer-hand ::after, main .board .dealer-hand ::before {
+  box-sizing: border-box;
+}
+main .board .player {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+main .board .player *, main .board .player ::after, main .board .player ::before {
+  box-sizing: border-box;
+}
+main .board .player-hand {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+main .board .player-hand *, main .board .player-hand ::after, main .board .player-hand ::before {
+  box-sizing: border-box;
+}
+main .board .card_holder {
+  flex-direction: column;
+  background-color: rgba(177, 107, 15, 0.829);
+  margin-left: 10px;
+  margin-top: 20px;
+  width: 100px;
+  height: 170px;
+}
+main .bottom {
+  flex-direction: column;
+  display: flex;
+}
+main .bottom #bank {
+  position: fixed;
+  top: 400px;
+  left: 10px;
+}
+main .bottom #bet {
+  position: fixed;
+  top: 500px;
+  left: 10px;
+}
+main .bottom .controls {
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+}
+main .bottom .controls *.button {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  background-color: #212529;
+  border-color: #212529;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  transition: color 0.15s;
+}
+main .bottom .controls *.button:hover {
+  background-color: #171a1b;
+  transition: color 0.15s;
+}
+main .bottom .controls *.button:disabled {
+  opacity: 0.6;
+}
+main #message {
+  color: white;
+  position: fixed;
+  top: 80px;
+  left: 10px;
+  width: 25%;
+}
+
+/*# sourceMappingURL=style.css.map */

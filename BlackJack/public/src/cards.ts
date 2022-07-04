@@ -1,14 +1,14 @@
 let cardCreator = {
     values: ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king"],
     suits: ["spades", "diamonds", "clubs", "hearts"],
-
-    imageDeck: []
-
-
 }
 
 class card {
-    constructor(value, source) {
+    value: number;
+    source: string;
+    image: HTMLImageElement
+    
+    constructor(value: number, source: string) {
         this.value = value
         this.source = source
         this.image = this.getImage()
@@ -18,27 +18,24 @@ class card {
         return this.value = 1
     }
 
-    getImage() {
-        let image = document.createElement('img')
+    getImage(): HTMLImageElement {
+        let image: HTMLImageElement = document.createElement('img')
         image.src = this.source
         image.id = "card"
-        image.setAttribute("draggable", true)
         return image
     }
 }
 
-let eachCard
+let eachCard: any
 
 let deck = {
-    cards: [],
-    source: []
-
+    cards: [] as card[],
 }
 
 //deck
 function getDeck() {
     //let deck = new Array()
-    let count
+    let count: number
     for (let s = 0; s < cardCreator.suits.length; s++) {
         for (let v = 0; v < cardCreator.values.length; v++) {
             //let card = {Value: this.values[v], Suit: this.suits[s]}
@@ -69,7 +66,7 @@ function getDeck() {
 
 
 //shuffle
-function shuffle(array) {
+function shuffle(array: any ) {
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
         let temp = array[i];
@@ -87,13 +84,13 @@ function fiveDeck(){
     getDeck()
 }
 
-function dealCard(person) {
+function dealCard(person: any) {
     if (deck.cards.length === 0) {
         fiveDeck()
 
     }
-    let card = deck.cards.pop()
-    let faceDown = document.createElement('img')
+    let card: card = deck.cards.pop()
+    let faceDown: HTMLImageElement = document.createElement('img')
     faceDown.src = './BlackJack/public/assets/images/facedown.png'
     faceDown.id = 'card'
     switch (person.hand.length) { // checks how many cards the person has to decide where to put the card
@@ -134,16 +131,16 @@ function dealSplitCard() {
 
 }
 
-function calculateScore(hand) {
-    let notAceTotal = 0
-    let aceTotal = 0
-    let total
-    for (i = 0; i < hand.length; i++) {
+function calculateScore(hand: Array<card>) {
+    let notAceTotal: number = 0
+    let aceTotal: number = 0
+    let total: number
+    for (let i:number = 0; i < hand.length; i++) {
         if (hand[i].value === 11) { continue }
         notAceTotal += hand[i].value
 
     }
-    for (i = 0; i < hand.length; i++) {
+    for (let i:number = 0; i < hand.length; i++) {
         if (hand[i].value !== 11) { continue }
         if (hand == dealer.hand) {
             if ((notAceTotal + hand[i].value) > 21) {

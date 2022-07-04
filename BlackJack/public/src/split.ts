@@ -1,6 +1,6 @@
 let split = {
     splitTitle: document.getElementById('splitHand'),
-    hand : [],
+    hand : [] as card[],
     cardHolders: {
         h1: document.getElementById("ps1"),
         h2: document.getElementById("ps2"),

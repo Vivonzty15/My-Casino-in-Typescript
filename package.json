@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch" : "sass -w BlackJack/scss/style.scss:BlackJack/css/style.css "
+    "watch": "sass -w BlackJack/scss/style.scss:BlackJack/css/style.css ",
+    "build": "npx tsc"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   "dependencies": {
     "cross-spawn": "^7.0.3",
     "json-server": "^0.17.0",
-    "live-server": "^1.2.1"
+    "live-server": "^1.2.1",
+    "typescript": "^4.7.4"
   }
 }

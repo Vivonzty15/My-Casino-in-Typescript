@@ -1,4 +1,20 @@
-let game = {
+interface Game {
+    money: HTMLHeadElement,
+    betInput: any,
+    inGame: false,
+    playerName: HTMLHeadElement,
+    hitButton: any,
+    standButton: any,
+    startGameButton: any,
+    doubleButton: any,
+    splitButton: any,
+    win: HTMLHeadElement,
+    lose: HTMLHeadElement,
+    push: HTMLHeadElement,
+    blackjack: HTMLHeadElement
+}
+
+let game: Game = {
     money: document.getElementById('money'),
     betInput: document.getElementById("bet-amt"),
     inGame: false,
@@ -15,7 +31,7 @@ let game = {
 }
 
 let dealer = {
-    hand: [],
+    hand: [] as card[],
     //score: calculateScore(dealer.hand),
     image: {
         c1: document.getElementById("d1"),
@@ -29,7 +45,13 @@ let dealer = {
 let c1 = document.createElement('img')
 
 class player {
-    constructor(name, playerID) {
+    name: string;
+    money: any;
+    hand: Array<card>;
+    image: any;
+    playerID: string
+
+    constructor(name: string, playerID: string) {
         this.name = name
         this.money = 100
         //this.score = calculateScore(player1.hand)
@@ -45,9 +67,9 @@ class player {
     }
 }
 
-let player_name = prompt("What's your name?","");
+let player_name: any = prompt("What's your name?", "");
 
-let player1
+let player1: player
 player1 = new player(player_name, "p1")
 
 
@@ -63,7 +85,7 @@ function setUp() {
     } else {
         game.money.textContent = "$" + player1.money
     }
-    game.playerName.textContent = player1.name +"'s Hand"
+    game.playerName.textContent = player1.name + "'s Hand"
     game.betInput.value = 10;
     game.betInput.disabled = false;
     game.standButton.disabled = true;
@@ -87,7 +109,7 @@ let re = new RegExp("/\D/")
 function newGame() {
     let re = new RegExp("^[0-9]*$")
 
-    game.startGameButton.addEventListener('click', async function () {
+    game.startGameButton.addEventListener('click', async function (): Promise<any> {
         if (game.betInput.value > player1.money || game.betInput.value < 10 || re.test(game.betInput.value) == false) {
             return
         } else {
@@ -99,8 +121,8 @@ function newGame() {
             //if (player1.hand[0].value === player1.hand[1].value) {
             //    splitButton.disabled = false // a work in progress
             //}
-    
-    console.log(re.test(game.betInput.value))
+
+            console.log(re.test(game.betInput.value))
             if (calculateScore(player1.hand) === 21) {
                 game.blackjack.style.display = "block"
                 disableButtons()
@@ -114,7 +136,7 @@ function newGame() {
                 game.hitButton.disabled = false;
                 game.startGameButton.disabled = true;
                 console.log('Game started')
-                if ((game.betInput.value * 2) < player1.money){
+                if ((game.betInput.value * 2) < player1.money) {
                     game.doubleButton.disabled = false;
                 }
             }
@@ -123,7 +145,7 @@ function newGame() {
 }
 // deals a card to player
 function hit() {
-    game.hitButton.addEventListener('click', async function () {
+    game.hitButton.addEventListener('click', async function (): Promise<any> {
         game.doubleButton.disabled = true;
         dealCard(player1)
         if (calculateScore(player1.hand) > 21) {
@@ -132,10 +154,10 @@ function hit() {
             dealer.image.c2.innerHTML = ''
             dealer.image.c2.appendChild(dealer.hand[1].image)
         } else if (calculateScore(player1.hand) === 21) {
-            blackjack.style.display = "block"
+            game.blackjack.style.display = "block"
             disableButtons()
             await time(3000)
-            stand(player1.hand)
+            stand()
         }
     })
 }
@@ -194,7 +216,7 @@ function lose() {
     game.lose.style.display = "block"
     player1.money -= Number(game.betInput.value)
     if (player1.money < 10) {
-        player1.money.textContent = "BUSTED"
+        player1.money = "BUSTED"
     }
 }
 
@@ -202,15 +224,15 @@ function push() {
     game.push.style.display = "block"
 }
 
-async function endGame(decision) { //callback is either win, lose, or push
+async function endGame(decision: Function): Promise<any> { //callback is either win, lose, or push
     // contains the code that happens when the game ends
     decision()
     await time(5000)
     setUp()
 }
 
-function time(seconds) {            // allows a five second break inbetween lines of code
-    return new Promise(resolve => { // await time() inside async function 
+function time(seconds: number) {            // allows a five second break inbetween lines of code
+    return new Promise<void>(resolve => { // await time() inside async function 
         setTimeout(function () {
             resolve()
         }, seconds)
